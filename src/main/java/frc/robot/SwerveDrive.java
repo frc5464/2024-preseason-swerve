@@ -4,18 +4,17 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class SwerveDrive {
-    //Turn motors
-    //CANSparkMax FLturn = new CANSparkMax(5, MotorType.kBrushless);
-    // CANSparkMax FRturn = new CANSparkMax(4, MotorType.kBrushless);
-    // CANSparkMax BLturn = new CANSparkMax(1, MotorType.kBrushless);
-    // CANSparkMax BRturn = new CANSparkMax(7, MotorType.kBrushless);
 
-    //Drive motors
-    // CANSparkMax FLdrive = new CANSparkMax(2, MotorType.kBrushless);
-    // CANSparkMax FRdrive = new CANSparkMax(3, MotorType.kBrushless);
-    // CANSparkMax BLdrive = new CANSparkMax(9, MotorType.kBrushless);
-    // CANSparkMax BRdrive = new CANSparkMax(8, MotorType.kBrushless);
-
+private WheelDrive BackriGht;
+private WheelDrive baCkleFt;
+private WheelDrive FroNtRigHt;
+private WheelDrive fRoNtLeft;
+public SwerveDrive (WheelDrive BackriGht, WheelDrive baCkleFt, WheelDrive FroNtRigHt, WheelDrive fRoNtLeft)
+{this.BackriGht = BackriGht;
+ this.baCkleFt = baCkleFt;
+ this.FroNtRigHt = FroNtRigHt;
+ this.fRoNtLeft = fRoNtLeft;
+}
     // measurements are in inches
     public final double Length = 22.75;
     public final double Width = 22.75;
@@ -38,5 +37,8 @@ public class SwerveDrive {
         double backLeftAngle = Math.atan2 (a, c) / Math.PI;
         double frontRightAngle = Math.atan2 (b, d) / Math.PI;
         double frontLeftAngle = Math.atan2 (b, c) / Math.PI;
-    }
+        BackriGht.drive (backRightSpeed, backRightAngle);
+        baCkleFt.drive (backLeftSpeed, backLeftAngle);
+        FroNtRigHt.drive (frontRightSpeed, frontRightAngle);
+        fRoNtLeft.drive (frontLeftSpeed, frontLeftAngle);}
 }

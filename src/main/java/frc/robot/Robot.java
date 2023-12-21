@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -21,9 +22,13 @@ public class Robot extends TimedRobot {
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
   //Classes
-  SwerveDrive swerve = new SwerveDrive();
-  WheelDrive wheel = new WheelDrive();
+  // SwerveDrive swerve = new SwerveDrive();
 
+   private WheelDrive backright = new WheelDrive(1, 9, 10);
+   private WheelDrive backleft = new WheelDrive(7, 8, 11);
+   private WheelDrive frontright = new WheelDrive(5, 2, 12);
+   private WheelDrive frontleft = new WheelDrive(4, 3, 13);
+   private SwerveDrive swervedrive = new SwerveDrive(backright, backleft, frontright, frontleft);
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -79,10 +84,12 @@ public class Robot extends TimedRobot {
   /** This function is called once when teleop is enabled. */
   @Override
   public void teleopInit() {}
-
+  private Joystick joystick = new Joystick (0);
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    swervedrive.drive (joystick.getRawAxis(1), joystick.getRawAxis(0), joystick.getRawAxis(4));
+  }
 
   /** This function is called once when the robot is disabled. */
   @Override
